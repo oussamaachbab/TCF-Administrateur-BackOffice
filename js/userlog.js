@@ -52,4 +52,3 @@ function createUser() {
     alert(`Good job ${userName} Lets Start !`);
     //redirectToUserLevel(username);
 }
-
