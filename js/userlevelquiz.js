@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 import levels from "../js/data.js"
 
-console.log(levels.a2.comprehension)
 
 
 
