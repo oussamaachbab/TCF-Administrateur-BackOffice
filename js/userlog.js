@@ -4,6 +4,7 @@ const admin = {
     id : 'admin1',
     role : 'admin',
     username : "admin",
+    password : "admin",
 };
 
 const adminJson = JSON.stringify(admin);
@@ -21,15 +22,6 @@ function createUser() {
         
         if(userRole !== 'admin'){
             window.location.href = "userlevelquiz.html?userName="+userName;
-            // const userSection = document.getElementById("user-section");
-            // userSection.classList.remove('hidden');
-            // let user = JSON.parse(sessionStorage.getItem(userName));
-            // userSection.innerHTML = `
-            //     <h2>Bienvenue, ${user.username}!</h2>
-            //     <p>Niveau actuel: ${user.lastLivelScore}</p>
-            //     <p>Catégorie: ${user.category}</p>
-            //     <p>Score: ${user.score}</p>
-            // `;
             return;
         }else{
             window.location.href = "admin.html";
