@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="css/categories.css"></head>
+<body>
+
+    <div class="main-container">
+        <div class="logo"></div>
+        <h1>Institut-Balzac</h1>
+        <hr>
+        <div class="niveux-container">
+            <h1>A1</h1>
+            <button  onclick="redirectToQuiz('A1','grammar','username')" class="cat-btn">grammar</button>
+            <button  onclick="redirectToQuiz('A1','vocabulary','username')" class="cat-btn">vocabulary</button>
+            <button  onclick="redirectToQuiz('A1','comprehension','username')" class="cat-btn mb5">comprehension</button>
+
+
+        </div>
+        <div class="niveux-container">
+            <h1>A2</h1>
+            <button disabled onclick="redirectToQuiz('A2','grammar','username')" class="cat-btn">grammar</button>
+            <button disabled onclick="redirectToQuiz('A2','vocabulary','username')" class="cat-btn">vocabulary</button>
+            <button disabled onclick="redirectToQuiz('A2','comprehension','username')" class="cat-btn mb5">comprehension</button>
+
+        </div>
+        <div class="niveux-container">
+            <h1>B1</h1>
+            <button disabled onclick="redirectToQuiz('B1','grammar','username')" class="cat-btn">grammar</button>
+            <button disabled onclick="redirectToQuiz('B1','vocabulary','username')" class="cat-btn">vocabulary</button>
+            <button disabled onclick="redirectToQuiz('B1','comprehension','username')" class="cat-btn mb5">comprehension</button>
+
+        </div>
+
+        <div class="niveux-container">
+            <h1>B2</h1>
+            <button disabled onclick="redirectToQuiz('B2','grammar','username')" class="cat-btn">grammar</button>
+            <button disabled onclick="redirectToQuiz('B2','vocabulary','username')" class="cat-btn">vocabulary</button>
+            <button disabled onclick="redirectToQuiz('B2','comprehension','username')" class="cat-btn mb5">comprehension</button>
+
+        </div>
+        <div class="niveux-container">
+            <h1>C1</h1>
+            <button disabled onclick="redirectToQuiz('C1','grammar','username')" class="cat-btn">grammar</button>
+            <button disabled onclick="redirectToQuiz('C1','vocabulary','username')" class="cat-btn">vocabulary</button>
+            <button disabled onclick="redirectToQuiz('C1','comprehension','username')" class="cat-btn mb5">comprehension</button>
+
+        </div>
+
+        <div class="niveux-container">
+            <h1>C2</h1>
+            <button disabled onclick="redirectToQuiz('C2','grammar','username')" class="cat-btn">grammar</button>
+            <button disabled onclick="redirectToQuiz('C2','vocabulary','username')" class="cat-btn">vocabulary</button>
+            <button disabled onclick="redirectToQuiz('C2','comprehension','username')" class="cat-btn mb5">comprehension</button>
+
+        </div>
+    </div>
+    <script>
+        function redirectToQuiz() {
+        window.location.href = "userlevelquiz.html";
+        }
+    </script>
+</body>
+</html>

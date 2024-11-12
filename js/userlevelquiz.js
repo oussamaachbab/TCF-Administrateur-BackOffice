@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get('userName');
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (user) {
         const level = user.level;
         const lastLevelScore = user.lastLevelScore;
-        console.log(level + ' ' + lastLevelScore);
+        //console.log(level + ' ' + lastLevelScore);
 
         let userHello = document.getElementById('userhello');
         userHello.textContent = `Bienvenue, ${user.username}!`;
@@ -15,5 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("User not found in sessionStorage");
     }
 });
+
+
+import levels from "../js/data.js"
+
+
+
 
 
