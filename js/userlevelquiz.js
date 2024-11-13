@@ -231,7 +231,7 @@ const b2 = {
 function redirectToQuiz(level, category) {
     const params = new URLSearchParams(window.location.search);
     const username = params.get("userName");
-    const storedUser = JSON.parse(sessionStorage.getItem(username));
+    const storedUser = JSON.parse(localStorage.getItem(username));
 
     if (!storedUser) {
         alert("User not found. Please create an account first.");
@@ -243,8 +243,8 @@ function redirectToQuiz(level, category) {
     storedUser.category = category;
     storedUser.LivelScore = level;
 
-    // Save the updated user object back to sessionStorage
-    sessionStorage.setItem(username, JSON.stringify(storedUser));
+    // Save the updated user object back to localStorage
+    localStorage.setItem(username, JSON.stringify(storedUser));
 
     // Redirect to the quiz page with the username in the URL
     window.location.href = `userlevelquiz.html?userName=${storedUser.username}`;
@@ -254,7 +254,7 @@ function redirectToQuiz(level, category) {
 function initializeQuizPage() {
     const params = new URLSearchParams(window.location.search);
     const username = params.get("userName");//contine just the user name value
-    const storedUser = JSON.parse(sessionStorage.getItem(username));//contine all the object
+    const storedUser = JSON.parse(localStorage.getItem(username));//contine all the object
 
     if (!username) {
         alert("Username is missing from the URL.");
@@ -403,7 +403,7 @@ function initializeQuizPage() {
         if(score == 10) {
           storedUser.categorys[storedUser.category] = true;
           storedUser.score = score;
-          sessionStorage.setItem(username, JSON.stringify(storedUser));
+          localStorage.setItem(username, JSON.stringify(storedUser));
         }
 
 
