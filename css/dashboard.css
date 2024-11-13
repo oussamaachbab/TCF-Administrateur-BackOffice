@@ -1,0 +1,15 @@
+.bouttonCat{
+    display: flex;
+    gap:20px;
+}
+.niveauBut{
+    background-color: brown;
+}
+#questions-container {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+}
+#questions-container.open {
+    max-height: 1000px; /* Une valeur suffisamment grande pour contenir toutes les questions */
+}

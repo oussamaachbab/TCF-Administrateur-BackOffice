@@ -233,6 +233,8 @@ const levels = { a1, a2, b1, b2, c1, c2};
 
 export default levels;
 
+
+
 //***********************************to import :
 
 // import levels from './levels.js'; 
