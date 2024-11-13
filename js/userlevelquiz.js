@@ -347,8 +347,8 @@ function initializeQuizPage() {
         console.log(currentQuestion+"hhhhhhh");
         document.getElementById("question").textContent = currentQuestion.question;
         const optionsContainer = document.getElementById("options");
-        optionsContainer.innerHTML = ""; // Clear previous options
-    
+        optionsContainer.innerHTML = ""; 
+        
         currentQuestion.answers.forEach(option => {
             const button = document.createElement("button");
             button.textContent = option;

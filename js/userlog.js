@@ -39,9 +39,9 @@ function createUser() {
         score : 0,
         quizResponses : [],
         categorys : {
-            "grammar":false,
-            "vocabulary":false,
-            "comprehension":false
+            "grammar":true,
+            "vocabulary":true,
+            "comprehension":true
         },
         category : "",
         LivelScore : "A1",
