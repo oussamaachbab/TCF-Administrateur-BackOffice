@@ -1,5 +1,5 @@
-import levels from './data.js'; 
+// import levels from './data.js'; 
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log(levels.a1);
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//     console.log(levels.a1);
+// });
