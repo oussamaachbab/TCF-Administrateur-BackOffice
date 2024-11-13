@@ -115,7 +115,7 @@ const a2 = {
     ]
   };
   
-const b2 = {
+const b2 = { 
     grammar: [
       { question: "Choisissez la bonne conjugaison : 'Il faut que tu ___ tes devoirs.'", answers: ["fasses", "fait", "fais", "fasse"], correct: "fasses" },
       { question: "Complétez : 'Bien que je ___ malade, je suis venu.'", answers: ["sois", "est", "suis", "soit"], correct: "sois" },

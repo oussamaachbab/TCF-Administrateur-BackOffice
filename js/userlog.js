@@ -8,7 +8,7 @@ const admin = {
 };
 
 const adminJson = JSON.stringify(admin);
-sessionStorage.setItem("admin", adminJson);
+localStorage.setItem("admin", adminJson);
 
 
 
@@ -17,8 +17,8 @@ function createUser() {
     var userName = document.getElementById('username').value;
     
     
-    if(sessionStorage.getItem(userName)){
-        const userRole = sessionStorage.getItem(userName) && JSON.parse(sessionStorage.getItem(userName)).role;
+    if(localStorage.getItem(userName)){
+        const userRole = localStorage.getItem(userName) && JSON.parse(localStorage.getItem(userName)).role;
         
         if(userRole !== 'admin'){
             window.location.href = "categories.html?userName="+userName;
@@ -39,17 +39,17 @@ function createUser() {
         score : 0,
         quizResponses : [],
         categorys : {
-            "grammar":true,
-            "vocabulary":true,
-            "comprehension":true
+            "grammar":false,
+            "vocabulary":false,
+            "comprehension":false
         },
         category : "",
-        LivelScore : "b1",
+        LivelScore : "a1"
         
     };
     
     const userJson = JSON.stringify(user);
-    sessionStorage.setItem(userName, userJson);
+    localStorage.setItem(userName, userJson);
     alert(`Good job ${userName} Lets Start !`);
     window.location.href = "categories.html?userName="+userName;
     // window.location.href = "userlevelquiz.html";
