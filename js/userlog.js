@@ -4,6 +4,7 @@ const admin = {
     id : 'admin1',
     role : 'admin',
     username : "admin",
+    password : "admin",
 };
 
 const adminJson = JSON.stringify(admin);
@@ -20,19 +21,10 @@ function createUser() {
         const userRole = sessionStorage.getItem(userName) && JSON.parse(sessionStorage.getItem(userName)).role;
         
         if(userRole !== 'admin'){
-            window.location.href = "userlevelquiz.html?userName="+userName;
-            // const userSection = document.getElementById("user-section");
-            // userSection.classList.remove('hidden');
-            // let user = JSON.parse(sessionStorage.getItem(userName));
-            // userSection.innerHTML = `
-            //     <h2>Bienvenue, ${user.username}!</h2>
-            //     <p>Niveau actuel: ${user.lastLivelScore}</p>
-            //     <p>Catégorie: ${user.category}</p>
-            //     <p>Score: ${user.score}</p>
-            // `;
+            window.location.href = "categories.html?userName="+userName;
             return;
-        }else{
-            window.location.href = "admin.html";
+        }else {
+            alert("Merci de Choisir la Correct Serssion!");
             return;
         }
     }
@@ -46,20 +38,20 @@ function createUser() {
         username : userName,
         score : 0,
         quizResponses : [],
-        category : {
-            "grammar":false,
-            "vocabulary":false,
-            "comprehension":false
+        categorys : {
+            "grammar":true,
+            "vocabulary":true,
+            "comprehension":true
         },
-        lastCorrectScore : 0,
-        LivelScore : "A1",
+        category : "",
+        LivelScore : "b1",
         
     };
     
     const userJson = JSON.stringify(user);
     sessionStorage.setItem(userName, userJson);
     alert(`Good job ${userName} Lets Start !`);
-    window.location.href = "userlevelquiz.html?userName="+userName;
+    window.location.href = "categories.html?userName="+userName;
     // window.location.href = "userlevelquiz.html";
     
 }
