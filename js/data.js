@@ -229,9 +229,9 @@ const b2 = {
   };
   
   
-const levels = { a1, a2, b1, b2, c1, c2};
+// const levels = { a1, a2, b1, b2, c1, c2};
 
-export default levels;
+// export default levels;
 
 //***********************************to import :
 

@@ -1,4 +1,5 @@
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get('userName');
@@ -18,9 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// redirectToQuiz()
+
+function redirectToQuiz() {
+    window.location.href = "userlevelquiz.html";
+    }
+
+
+
 import levels from "../js/data.js"
-
-
-
 
 
