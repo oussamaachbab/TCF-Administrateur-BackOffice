@@ -21,10 +21,10 @@ function createUser() {
         const userRole = sessionStorage.getItem(userName) && JSON.parse(sessionStorage.getItem(userName)).role;
         
         if(userRole !== 'admin'){
-            window.location.href = "userlevelquiz.html?userName="+userName;
+            window.location.href = "categories.html?userName="+userName;
             return;
-        }else{
-            window.location.href = "admin.html";
+        }else {
+            alert("Merci de Choisir la Correct Serssion!");
             return;
         }
     }
@@ -38,12 +38,12 @@ function createUser() {
         username : userName,
         score : 0,
         quizResponses : [],
-        category : {
+        categorys : {
             "grammar":false,
             "vocabulary":false,
             "comprehension":false
         },
-        lastCorrectScore : 0,
+        category : "",
         LivelScore : "A1",
         
     };
@@ -51,7 +51,7 @@ function createUser() {
     const userJson = JSON.stringify(user);
     sessionStorage.setItem(userName, userJson);
     alert(`Good job ${userName} Lets Start !`);
-    window.location.href = "userlevelquiz.html?userName="+userName;
+    window.location.href = "categories.html?userName="+userName;
     // window.location.href = "userlevelquiz.html";
     
 }
