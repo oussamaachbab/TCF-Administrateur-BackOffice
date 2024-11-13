@@ -44,7 +44,7 @@ function createUser() {
             "comprehension":true
         },
         category : "",
-        LivelScore : "A1",
+        LivelScore : "b1",
         
     };
     
