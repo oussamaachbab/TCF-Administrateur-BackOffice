@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/userlevelquiz.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="main-container">
+        <div class="logo"></div>
+        <h1>Institut-Balzac</h1>
+        <hr>
+        <div id="quiz-container">
+            <div class="questions">this is a test question</div>
+            <div class="answers"></div>
+        </div>
+    </div> -->
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <div class="logo"></div>
+    </div>
+    <div style="" class="header">
+
+        <h1 style="">Institut-Balzac</h1>
+        <h2 id="sc">Test de compréhension</h2>
+    </div>
+    <div id="quiz-container">
+        <h3>Test de TCF</h3>
+        <div id="div-timer">
+            <div id="timer" style="display: none;" class="hidden" ></div>
+        </div>
+        <button id="start-button" onclick="startQuiz()">Demarrer Le Quiez</button>
+        <div id="question-container" class="hidden">
+            <div id="question">test</div>
+            <div id="options">test</div>
+            <button class="hidden" id="next-button">Suivant</button>
+        </div>
+        <!-- <div id="score-container" class="hidden"></div> -->
+        <button id="retake-button" class="hidden" onclick="retakeQuiz()">Reprendre Quiz</button>
+
+    </div>
+
+
+</body>
+
+<script type="module" src="./js/userlevelquiz.js"></script>
+</html>

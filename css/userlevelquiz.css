@@ -1,0 +1,36 @@
+body{
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    height: 90%;
+    width: 60%;
+}
+
+.logo{
+    width: 25%;
+    height: 200px;
+    background-image: url(./../img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-bottom: 20px;
+}
+
+
+
+.questions{
+    font-family: arial, sans-serif;
+    font-size: xx-large;
+}

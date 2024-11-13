@@ -6,20 +6,33 @@
     <title>User Management</title>
     <script src="index.js" defer></script> <!-- Link to your JS file -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 150vh;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
 
-    <!-- User Creation Form -->
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-        <h1 class="text-2xl font-semibold text-center mb-6">Créer un compte</h1>
-        <input type="text" id="username" class="w-full p-3 border border-gray-300 rounded mb-4" placeholder="Entrez votre nom d'utilisateur" />
-        <button onclick="createUser()" class="w-full p-3 bg-blue-500 text-white rounded">Start The Quiz</button>
+    <div class="flex justify-end mt-0 mb-0 rounded-lg">
+        <a href="./adminlog.html" class="m-10 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Sign In
+        </a>
     </div>
 
-    <!-- <div id="user-section" class="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg hidden">
-    </div> -->
+    <div class="">
+        <div style="width:100%; height:auto; display: flex; justify-content: center;">
+            <img src="./img/undraw_undraw_undraw_undraw_selection_f3no_jw9h_-1-_nxfh_-1-_6d1x.svg" alt="" style="width: 600px;">
+        </div>
+        <div class="max-w-md mx-auto mt-5 p-6 bg-white shadow-xl rounded-lg">
+            <h1 class="text-2xl font-semibold text-center mb-6">Créer un compte</h1>
+            <input type="text" id="username" class="w-full p-3 border border-gray-300 rounded mb-4" placeholder="Entrez votre nom d'utilisateur" />
+            <button onclick="createUser()" class="font-bold hover:bg-blue-700 w-full p-3 bg-blue-500 text-white rounded">Start The Quiz</button>
+        </div>
+    </div>
 
+    <script src="./js/testData.js"></script>
     <script src="./js/userlog.js"></script>
-    <script type="module" src="./js/testData.js"></script>
+    <script src="./js/userlevelquiz.js"></script>
 </body>
 </html>
