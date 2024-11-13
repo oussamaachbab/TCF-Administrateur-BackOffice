@@ -318,7 +318,7 @@ function initializeQuizPage() {
         loadQuestion();
     });
     function startTimer() {
-        let timeLeft = 10;
+        let timeLeft = 30;
         document.getElementById('timer').textContent = `${timeLeft}s`;
     
         timerInterval = setInterval(() => {
@@ -400,12 +400,15 @@ function initializeQuizPage() {
         });
     }
     function endQuiz() {
-        // localStorage.setItem("LastCorrectScore", score);
-        // localStorage.setItem("LastLivelScore", levelScore(score));
+        alert(`le type de score est :${typeof(storedUser.category)} , et le scoe est :${storedUser.category}`);
+        if(score == 10) {
+          storedUser.categorys[storedUser.category] = true;
+          sessionStorage.setItem(username, JSON.stringify(storedUser));
+        }
+
+
         const scoreContainer = document.getElementById("sc");
-        scoreContainer.classList.remove("hidden");
-        scoreContainer.style.display = "block";
-        scoreContainer.innerHTML = `Votre score est de ${score} / ${flixebleArray.length}, votre Niveau est : ${levelScore(score)}`;
+        scoreContainer.innerHTML = `Votre score est de ${score} / ${flixebleArray.length}.`;
         document.getElementById("timer").style.display = "none";
         clearInterval(timerInterval);
         document.getElementById("question-container").classList.add("hidden");
@@ -417,15 +420,7 @@ function initializeQuizPage() {
     document.getElementById("retake-button").addEventListener('click', retakeQuiz);
 
     function retakeQuiz() {
-        // document.getElementById("sc").textContent = "Test de compréhension";
-        // currentQuestionIndex = 0;
-        // score = 0;
-        // quizResponses = [];
-        // document.getElementById('retake-button').classList.add('hidden');
-        // document.getElementById('question-container').classList.remove('hidden');
-        // document.getElementById('next-button').classList.add('hidden');
-        // loadQuestion();
-        window.location.href = "categories.html";
+        window.location.href = "categories.html?userName="+storedUser.username;
     }
     //mn hna sala risk******************************************************************************** 
 }
