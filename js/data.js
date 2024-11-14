@@ -158,7 +158,7 @@ const b2 = {
     grammar: [
       { question: "Quelle est la bonne conjugaison du verbe dans cette phrase : 'Si j'avais su, je (venir) plus tôt.'", answers: ["viendrais", "viens", "serais venu", "viendrais"], correct: "serais venu" },
       { question: "Complétez la phrase : 'Il (être) parti avant que je n'arrive.'", answers: ["était", "soit", "fût", "sera"], correct: "fût" },
-      { question: "Quel est le bon ordre des mots dans cette phrase : 'Je ne savais pas que (quand) il arriverait.'", answers: ["il", "quand", "arriverait", "Je ne savais pas"], correct: "quand il arriverait" },
+      { question: "Quel est le bon ordre des mots dans cette phrase : 'Je ne savais pas que (quand) il arriverait.'", answers: ["il", "quand il arriverait", "arriverait", "Je ne savais pas"], correct: "quand il arriverait" },
       { question: "Complétez la phrase : 'Bien que ce soit difficile, il (continuer) à avancer.'", answers: ["continue", "continuera", "continuait", "continuant"], correct: "continue" },
       { question: "Choisissez le bon usage du subjonctif : 'Il est nécessaire que nous (partir) avant midi.'", answers: ["partons", "partirons", "partions", "partent"], correct: "partions" },
       { question: "Quel est le bon usage de l'infinitif : 'Elle préfère (lire) que (regarder) la télévision.'", answers: ["lire, regarder", "lire, regarder", "lire, regarder", "lire, regarder"], correct: "lire, regarder" },
@@ -229,15 +229,19 @@ const b2 = {
   };
   
   
-// const levels = { a1, a2, b1, b2, c1, c2};
+document.addEventListener("DOMContentLoaded", ()=>{
 
-// export default levels;
+  localStorage.setItem('a1', JSON.stringify(a1));
+  localStorage.setItem('a2', JSON.stringify(a2));
+  localStorage.setItem('b1', JSON.stringify(b1));
+  localStorage.setItem('b2', JSON.stringify(b2));
+  localStorage.setItem('c1', JSON.stringify(c1));
+  localStorage.setItem('c2', JSON.stringify(c2));
 
+  // function loadQuizData(quizId) {
+  //   const data = localStorage.getItem(quizId);
+  //   return data ? JSON.parse(data) : null;
+  // }
+  
 
-
-//***********************************to import :
-
-// import levels from './levels.js'; 
-
-// console.log(levels.a1);  
-// console.log(levels.b2);  
+});
