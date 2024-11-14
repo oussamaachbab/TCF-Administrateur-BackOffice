@@ -400,9 +400,9 @@ function initializeQuizPage() {
         });
     }
     function endQuiz() {
-        alert(`le type de score est :${typeof(storedUser.category)} , et le scoe est :${storedUser.category}`);
         if(score == 10) {
           storedUser.categorys[storedUser.category] = true;
+          storedUser.score = score;
           sessionStorage.setItem(username, JSON.stringify(storedUser));
         }
 
