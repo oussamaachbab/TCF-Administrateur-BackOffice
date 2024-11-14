@@ -39,12 +39,12 @@ function createUser() {
         score : 0,
         quizResponses : [],
         categorys : {
-            "grammar":false,
-            "vocabulary":false,
-            "comprehension":false
+            "grammar":true,
+            "vocabulary":true,
+            "comprehension":true
         },
         category : "",
-        LivelScore : "a1"
+        LivelScore : "b2"
         
     };
     
@@ -52,7 +52,6 @@ function createUser() {
     localStorage.setItem(userName, userJson);
     alert(`Good job ${userName} Lets Start !`);
     window.location.href = "categories.html?userName="+userName;
-    // window.location.href = "userlevelquiz.html";
     
 }
 
