@@ -72,6 +72,8 @@ function displayQuestions(category) {
         // Ajouter les questions
         a1[category].forEach((q, index) => {
             const questionDiv = document.createElement('div');
+            questionDiv.style.textAlign = 'center';
+
             questionDiv.classList.add('question-container');
             const questionText = document.createElement('p');
             questionText.textContent = `${index + 1}. ${q.question}`;
@@ -104,7 +106,17 @@ function displayQuestions(category) {
 
             container.appendChild(questionDiv);
         });
-
+        
+        //bouton pour ajouter une question
+        const addButton = document.createElement('button');
+        addButton.textContent = `Ajouter une question (${category})`;
+        //addButton.classList.add('btn', 'btn-outline-primary', 'mt-3','mb-3');
+        addButton.style.backgroundColor = "blue";
+        addButton.style.color = "white";
+        addButton.style.borderRadius = "5px";
+        addButton.style.float="right";
+        addButton.onclick = () => addQuestion(category);
+        container.appendChild(addButton);
         //réajuster la hauteur
         setTimeout(() => {
             container.style.maxHeight = container.scrollHeight + 'px'; 
@@ -193,6 +205,37 @@ function editQuestion(category, index) {
         document.body.removeChild(modalContainer);
     });
 }
+
+function addQuestion(category) {
+    const formulaireAjout = `
+        <div id="formulaire-ajout-container" style="padding: 20px; background: #fff; border: 1px solid; border-radius: 5px; margin: 100px;">
+            <h3>Ajouter une nouvelle question à la catégorie ${category}</h3>
+            <label for="new-question">Question :</label>
+            <input type="text" id="new-question" style="width: 100%; margin-bottom: 10px;" />
+
+            <label for="new-answer1">Réponse 1 :</label>
+            <input type="text" id="new-answer1" style="width: 100%; margin-bottom: 10px;" />
+
+            <label for="new-answer2">Réponse 2 :</label>
+            <input type="text" id="new-answer2" style="width: 100%; margin-bottom: 10px;" />
+
+            <label for="new-answer3">Réponse 3 :</label>
+            <input type="text" id="new-answer3" style="width: 100%; margin-bottom: 10px;" />
+
+            <label for="new-answer4">Réponse 4 :</label>
+            <input type="text" id="new-answer4" style="width: 100%; margin-bottom: 10px;" />
+
+            <label for="new-correct-answer">Réponse correcte :</label>
+            <input type="text" id="new-correct-answer" style="width: 100%; margin-bottom: 10px;" />
+
+            <button id="save-new-question-btn">Ajouter</button>
+            <button id="cancel-new-question-btn" style="margin-left: 10px;">Annuler</button>
+        </div>
+    `;
+
+    
+}
+
 
  //fonction de suppression
  function deleteQuestion(category, index) {
