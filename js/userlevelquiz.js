@@ -164,23 +164,22 @@ function initializeQuizPage() {
         });
     }
     function endQuiz() {
-        if(score == 10) {
-          storedUser.categorys[storedUser.category] = true;
-          storedUser.score = score;
-          storedUser.responses=quizResponses;
-          localStorage.setItem(username, JSON.stringify(storedUser));
-
+        if(score === flixebleArray.length) {  // hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+            if (!storedUser.categorys) storedUser.categorys = {};
+            storedUser.categorys[storedUser.category] = true;
+            storedUser.score = score;
+            storedUser.responses = quizResponses;
+            localStorage.setItem(username, JSON.stringify(storedUser));
         }
-
-
+    
         const scoreContainer = document.getElementById("sc");
         scoreContainer.innerHTML = `Votre score est de ${score} / ${flixebleArray.length}.`;
         document.getElementById("timer").style.display = "none";
         clearInterval(timerInterval);
         document.getElementById("question-container").classList.add("hidden");
         document.getElementById('retake-button').classList.remove('hidden');
-        
     }
+    
 
     document.getElementById("next-button").addEventListener('click', goToNextQuestion);
     document.getElementById("retake-button").addEventListener('click', retakeQuiz);

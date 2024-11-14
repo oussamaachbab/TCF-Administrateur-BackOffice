@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get("userName");
     const storedUser = JSON.parse(localStorage.getItem(username));
+    const disuser = document.getElementById('disuser');
+
+    disuser.textContent = "USERNAME : " + params.get("userName")
     
     if (storedUser.categorys.comprehension && storedUser.categorys.grammar && storedUser.categorys.vocabulary) {
 
@@ -63,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
 
-        // Enable buttons up to and including the next level
         for (let i = 0; i <= nextLevelIndex; i++) {
             const levelClass = levels[i];
             let buttons = document.getElementsByClassName(levelClass);
@@ -74,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return;
     }
-    //bda risk mn hna
 
     const levelToOpen = ["cat-a2", "cat-b1", "cat-b2", "cat-c1", "cat-c2"];
         
@@ -110,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 buttonsOpen[j].disabled = false;
             }
         }
-    //sla hna
 });
 
 
