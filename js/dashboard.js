@@ -1,5 +1,5 @@
 // Données des questions
-const a1 = {
+const defaultQuestionsData = {
     grammar: [
       { question: "Quel est le verbe auxiliaire dans la phrase 'Il est allé' ?", answers: ["avoir", "être", "faire", "aller"], correct: "être" },
       { question: "Quel pronom personnel convient : ___ est mon frère.", answers: ["Il", "Elle", "Ils", "Nous"], correct: "Il" },
@@ -37,22 +37,31 @@ const a1 = {
       { question: "Quelle est la résolution de l'histoire ?", answers: ["Il réussit son examen", "Il échoue", "Il abandonne", "Il part"], correct: "Il réussit son examen" }
     ]
   };
+  if (!localStorage.getItem('questionsData')) {
+    localStorage.setItem('questionsData', JSON.stringify(defaultQuestionsData));
+}
+
+// Charger les données depuis localStorage
+const a1 = JSON.parse(localStorage.getItem('questionsData'));
+
+// Fonction pour sauvegarder les données dans localStorage après chaque modification
+function saveQuestionsData() {
+    localStorage.setItem('questionsData', JSON.stringify(a1));
+}
 
 
-
-// Fonction pour afficher les questions en fonction de la catégorie sélectionnée
+// afficher les questions en fonction de la catégorie
 function displayQuestions(category) {
     const container = document.getElementById('questions-container');
-
-    // Si la catégorie est déjà affichée, on la masque avec une animation
+    // masquer la catégorie affiché avec une animation
     if (container.getAttribute('data-category') === category && container.style.maxHeight !== '0px') {
-        container.style.maxHeight = '0'; // Réduit la hauteur pour masquer l'élément
+        container.style.maxHeight = '0';
         setTimeout(() => {
-            container.style.display = 'none'; // Cache après l'animation
+            container.style.display = 'none';
         }, 500);
     } else {
-        // Si la catégorie est masquée, on l'affiche avec une animation
-        container.style.display = 'block'; // Rendre le conteneur visible avant l'animation
+        // afficher la catégorie si elle est masqué
+        container.style.display = 'block'; 
         container.setAttribute('data-category', category); // Définir la catégorie actuelle
         container.innerHTML = ''; // Réinitialiser le contenu du conteneur
 
@@ -64,7 +73,6 @@ function displayQuestions(category) {
         a1[category].forEach((q, index) => {
             const questionDiv = document.createElement('div');
             questionDiv.classList.add('question-container');
-
             const questionText = document.createElement('p');
             questionText.textContent = `${index + 1}. ${q.question}`;
             questionDiv.appendChild(questionText);
@@ -97,20 +105,101 @@ function displayQuestions(category) {
             container.appendChild(questionDiv);
         });
 
-        // Réajuster la hauteur pour l'animation
+        //réajuster la hauteur
         setTimeout(() => {
-            container.style.maxHeight = container.scrollHeight + 'px'; // Ajuster la hauteur du conteneur
-        }, 10); // Petite pause pour permettre l'application de la transition
+            container.style.maxHeight = container.scrollHeight + 'px'; 
+        }, 400);
     }
 }
 
+//fonction de modification
+function editQuestion(category, index) {
+    // Récupérer la question à modifier
+    const questionData = a1[category][index];
+    
+    //création de formulaire de modification
+    const formulaire = `
+        <div id="formulaire-container" style="padding: 20px; background: #fff; border: 1px solid; border-radius: 5px; margin: 100px;">
+            <h3>Modifier la question ${index + 1}</h3>
+            <label for="question-text">Question :</label>
+            <input type="text" id="question-text" value="${questionData.question}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer1">Réponse 1 :</label>
+            <input type="text" id="answer1" value="${questionData.answers[0]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer2">Réponse 2 :</label>
+            <input type="text" id="answer2" value="${questionData.answers[1]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer3">Réponse 3 :</label>
+            <input type="text" id="answer3" value="${questionData.answers[2]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer4">Réponse 4 :</label>
+            <input type="text" id="answer4" value="${questionData.answers[3]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="correct-answer">Réponse correcte :</label>
+            <input type="text" id="correct-answer" value="${questionData.correct}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <button id="save-edit-btn">Sauvegarder</button>
+            <button id="cancel-edit-btn" style="margin-left: 10px;">Annuler</button>
+        </div>
+    `;
 
- 
- // Fonction pour supprimer une question
+    //afficher le formulaire dans une modal
+    const modalContainer = document.createElement('div');
+    modalContainer.id = 'modal-container';
+    modalContainer.style.position = 'fixed';
+    modalContainer.style.top = '0';
+    modalContainer.style.left = '0';
+    modalContainer.style.width = '100vw';
+    modalContainer.style.height = '100vh';
+    modalContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    modalContainer.style.display = 'flex';
+    modalContainer.style.alignItems = 'center';
+    modalContainer.style.justifyContent = 'center';
+    modalContainer.innerHTML = formulaire;
+    document.body.appendChild(modalContainer);
+
+    //sauvegarder les modifications
+    document.getElementById('save-edit-btn').addEventListener('click', () => {
+        const newQuestion = document.getElementById('question-text').value;
+        const newAnswers = [
+            document.getElementById('answer1').value,
+            document.getElementById('answer2').value,
+            document.getElementById('answer3').value,
+            document.getElementById('answer4').value
+        ];
+        const newCorrectAnswer = document.getElementById('correct-answer').value;
+
+        //mettre à jour les données de la question
+        a1[category][index] = {
+            question: newQuestion,
+            answers: newAnswers,
+            correct: newCorrectAnswer
+        };
+
+        //enregistrer les données mises à jour dans localStorage
+        saveQuestionsData();
+
+        // Fermer le formulaire de modification
+        document.body.removeChild(modalContainer);
+
+        //rafraichir l'affichage des questions
+        displayQuestions(category);
+    });
+
+    //ajouter l'événement pour annuler l'édition
+    document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+        //fermer la modal sans enregistrer
+        document.body.removeChild(modalContainer);
+    });
+}
+
+ //fonction de suppression
  function deleteQuestion(category, index) {
      if (confirm('Voulez-vous vraiment supprimer cette question ?')) {
-         a1[category].splice(index, 1); // Supprimer la question
-         displayQuestions(category); // Rafraîchir l'affichage des questions de la catégorie
+         a1[category].splice(index, 1); 
+         saveQuestionsData();
+         displayQuestions(category);
      }
  }
  
