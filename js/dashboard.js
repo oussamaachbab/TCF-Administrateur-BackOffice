@@ -1,5 +1,5 @@
 // Données des questions
-const a1 = {
+const defaultQuestionsData = {
     grammar: [
       { question: "Quel est le verbe auxiliaire dans la phrase 'Il est allé' ?", answers: ["avoir", "être", "faire", "aller"], correct: "être" },
       { question: "Quel pronom personnel convient : ___ est mon frère.", answers: ["Il", "Elle", "Ils", "Nous"], correct: "Il" },
@@ -37,6 +37,17 @@ const a1 = {
       { question: "Quelle est la résolution de l'histoire ?", answers: ["Il réussit son examen", "Il échoue", "Il abandonne", "Il part"], correct: "Il réussit son examen" }
     ]
   };
+  if (!localStorage.getItem('questionsData')) {
+    localStorage.setItem('questionsData', JSON.stringify(defaultQuestionsData));
+}
+
+// Charger les données depuis localStorage
+const a1 = JSON.parse(localStorage.getItem('questionsData'));
+
+// Fonction pour sauvegarder les données dans localStorage après chaque modification
+function saveQuestionsData() {
+    localStorage.setItem('questionsData', JSON.stringify(a1));
+}
 
 
 // afficher les questions en fonction de la catégorie
@@ -103,36 +114,38 @@ function displayQuestions(category) {
 
 //fonction de modification
 function editQuestion(category, index) {
-    //la question à modifier
+    // Récupérer la question à modifier
     const questionData = a1[category][index];
-    //création du formulaire
-    const formulaire=  `
-    <div id="formulaire-container" style="padding: 20px; background: #fff; border: 1px solid ; border-radius: 5px; margin: 100px;">
-        <h3>Modifier la question ${index + 1}</h3>
-        <label for="question-text">Question :</label>
-        <input type="text" id="question-text" value="${questionData.question}" style="width: 100%; margin-bottom: 10px;" />
-        
-        <label for="answer1">Réponse 1 :</label>
-        <input type="text" id="answer1" value="${questionData.answers[0]}" style="width: 100%; margin-bottom: 10px;" />
-        
-        <label for="answer2">Réponse 2 :</label>
-        <input type="text" id="answer2" value="${questionData.answers[1]}" style="width: 100%; margin-bottom: 10px;" />
-        
-        <label for="answer3">Réponse 3 :</label>
-        <input type="text" id="answer3" value="${questionData.answers[2]}" style="width: 100%; margin-bottom: 10px;" />
-        
-        <label for="answer4">Réponse 4 :</label>
-        <input type="text" id="answer4" value="${questionData.answers[3]}" style="width: 100%; margin-bottom: 10px;" />
-        
-        <label for="correct-answer">Réponse correcte :</label>
-        <input type="text" id="correct-answer" value="${questionData.correct}" style="width: 100%; margin-bottom: 10px;" />
-        
-        <button id="save-edit-btn">Sauvegarder</button>
-        <button id="cancel-edit-btn" style="margin-left: 10px;">Annuler</button>
-    </div>
-`;
-//afficher le formulaire
-const modalContainer = document.createElement('div');
+    
+    //création de formulaire de modification
+    const formulaire = `
+        <div id="formulaire-container" style="padding: 20px; background: #fff; border: 1px solid; border-radius: 5px; margin: 100px;">
+            <h3>Modifier la question ${index + 1}</h3>
+            <label for="question-text">Question :</label>
+            <input type="text" id="question-text" value="${questionData.question}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer1">Réponse 1 :</label>
+            <input type="text" id="answer1" value="${questionData.answers[0]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer2">Réponse 2 :</label>
+            <input type="text" id="answer2" value="${questionData.answers[1]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer3">Réponse 3 :</label>
+            <input type="text" id="answer3" value="${questionData.answers[2]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="answer4">Réponse 4 :</label>
+            <input type="text" id="answer4" value="${questionData.answers[3]}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <label for="correct-answer">Réponse correcte :</label>
+            <input type="text" id="correct-answer" value="${questionData.correct}" style="width: 100%; margin-bottom: 10px;" />
+            
+            <button id="save-edit-btn">Sauvegarder</button>
+            <button id="cancel-edit-btn" style="margin-left: 10px;">Annuler</button>
+        </div>
+    `;
+
+    //afficher le formulaire dans une modal
+    const modalContainer = document.createElement('div');
     modalContainer.id = 'modal-container';
     modalContainer.style.position = 'fixed';
     modalContainer.style.top = '0';
@@ -145,35 +158,48 @@ const modalContainer = document.createElement('div');
     modalContainer.style.justifyContent = 'center';
     modalContainer.innerHTML = formulaire;
     document.body.appendChild(modalContainer);
-//sauvegarder les informations
-document.getElementById('save-edit-btn').addEventListener('click',()=>{
-    const newQuestion=document.getElementById('question-text').value;
-    const newAnswers=[
-        document.getElementById('answer1').value,
-        document.getElementById('answer2').value,
-        document.getElementById('answer3').value,
-        document.getElementById('answer4').value
-    ]
-    const newCorrectAnswer=document.getElementById('correct-answer').value;
-    //on va mettre à jour les données de la question
-    a1[category][index]={
-        question:newQuestion,
-        answers:newAnswers,
-        correct:newCorrectAnswer
-    }
 
+    //sauvegarder les modifications
+    document.getElementById('save-edit-btn').addEventListener('click', () => {
+        const newQuestion = document.getElementById('question-text').value;
+        const newAnswers = [
+            document.getElementById('answer1').value,
+            document.getElementById('answer2').value,
+            document.getElementById('answer3').value,
+            document.getElementById('answer4').value
+        ];
+        const newCorrectAnswer = document.getElementById('correct-answer').value;
+
+        //mettre à jour les données de la question
+        a1[category][index] = {
+            question: newQuestion,
+            answers: newAnswers,
+            correct: newCorrectAnswer
+        };
+
+        //enregistrer les données mises à jour dans localStorage
+        saveQuestionsData();
+
+        // Fermer le formulaire de modification
+        document.body.removeChild(modalContainer);
+
+        //rafraichir l'affichage des questions
+        displayQuestions(category);
+    });
+
+    //ajouter l'événement pour annuler l'édition
+    document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+        //fermer la modal sans enregistrer
+        document.body.removeChild(modalContainer);
+    });
 }
-)
-
-
-}
- 
 
  //fonction de suppression
  function deleteQuestion(category, index) {
      if (confirm('Voulez-vous vraiment supprimer cette question ?')) {
          a1[category].splice(index, 1); 
-         displayQuestions(category); // Rafraîchir l'affichage des questions de la catégorie
+         saveQuestionsData();
+         displayQuestions(category);
      }
  }
  
