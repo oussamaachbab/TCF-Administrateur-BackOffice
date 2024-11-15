@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return;
     }
-    //bda risk mn hna
 
     const levelToOpen = ["cat-a2", "cat-b1", "cat-b2", "cat-c1", "cat-c2"];
         
@@ -110,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 buttonsOpen[j].disabled = false;
             }
         }
-    //sla hna
 });
 
 
