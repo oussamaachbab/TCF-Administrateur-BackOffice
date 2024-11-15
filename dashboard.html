@@ -86,9 +86,53 @@
                     </div>
                     
                     
-                    <div id="questions-container"></div>                    
+                    <div id="questions-container"></div> 
 
-                   
+                    <div id="A2-buttons" class="btn-group bouttonCat" role="group">
+                        <button class="niveauBut">A2</button>
+                            <button class="btn btn-primary">Grammar</button>
+                            <button class="btn btn-secondary">Vocabulary</button>
+                            <button class="btn btn-success">Comprehension</button>
+                        </div>      
+                        <div id="A2-questions-container" class="questions-container"></div>
+                        
+                        <div id="B1-buttons" class="btn-group bouttonCat" role="group">
+                            <button class="niveauBut">B1</button>
+                            <button onclick="displayQuestions('grammar', 'B1')" class="btn btn-primary">Grammar</button>
+                            <button onclick="displayQuestions('vocabulary', 'B1')" class="btn btn-secondary">Vocabulary</button>
+                            <button onclick="displayQuestions('comprehension', 'B1')" class="btn btn-success">Comprehension</button>
+                        </div>
+                        <div id="B1-questions-container" class="questions-container"></div>
+                
+                        <div class="section-divider"></div>
+                
+                        <div id="B2-buttons" class="btn-group bouttonCat" role="group">
+                            <button class="niveauBut">B2</button>
+                            <button onclick="displayQuestions('grammar', 'B2')" class="btn btn-primary">Grammar</button>
+                            <button onclick="displayQuestions('vocabulary', 'B2')" class="btn btn-secondary">Vocabulary</button>
+                            <button onclick="displayQuestions('comprehension', 'B2')" class="btn btn-success">Comprehension</button>
+                        </div>
+                        <div id="B2-questions-container" class="questions-container"></div>
+                
+                        <div class="section-divider"></div>
+                
+                        <div id="C1-buttons" class="btn-group bouttonCat" role="group">
+                            <button class="niveauBut">C1</button>
+                            <button onclick="displayQuestions('grammar', 'C1')" class="btn btn-primary">Grammar</button>
+                            <button onclick="displayQuestions('vocabulary', 'C1')" class="btn btn-secondary">Vocabulary</button>
+                            <button onclick="displayQuestions('comprehension', 'C1')" class="btn btn-success">Comprehension</button>
+                        </div>
+                        <div id="C1-questions-container" class="questions-container"></div>
+                
+                        <div class="section-divider"></div>
+                
+                        <div id="C2-buttons" class="btn-group bouttonCat" role="group">
+                            <button class="niveauBut">C2</button>
+                            <button onclick="displayQuestions('grammar', 'C2')" class="btn btn-primary">Grammar</button>
+                            <button onclick="displayQuestions('vocabulary', 'C2')" class="btn btn-secondary">Vocabulary</button>
+                            <button onclick="displayQuestions('comprehension', 'C2')" class="btn btn-success">Comprehension</button>
+                        </div>
+                        <div id="C2-questions-container" class="questions-container"></div>
                 </div>
             </div>
         </div>
@@ -106,7 +150,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="js/index.js"></script>
-    <script src="js/dashboard.js"></script>
+        <script src="js/dashboard.js"></script>
+
     <script src="./js/data.js"></script>    <!--ilyas zazd hada you can ask-->
 </body>
 
