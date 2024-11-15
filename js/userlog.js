@@ -37,7 +37,6 @@ function createUser() {
         role : 'user',
         username : userName,
         score : 0,
-        quizResponses : [],
         categorys : {
             "grammar":true,
             "vocabulary":true,

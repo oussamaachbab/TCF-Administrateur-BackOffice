@@ -173,7 +173,7 @@ function initializeQuizPage() {
         });
     }
     function endQuiz() {
-        if(score === flixebleArray.length) {  // hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+        if(score === flixebleArray.length) {  
             if (!storedUser.categorys) storedUser.categorys = {};
             storedUser.categorys[storedUser.category] = true;
             storedUser.score = score;

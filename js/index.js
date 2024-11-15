@@ -144,7 +144,7 @@ function selectAnswer(answer, button) {
         question: currentQuestion.question,
         userAnswer: answer,
         isCorrect: isCorrect,
-        timeTaken: timeTaken
+        timeTaken: 10-timeTaken
     });
     document.getElementById("next-button").classList.remove("hidden");
 }
