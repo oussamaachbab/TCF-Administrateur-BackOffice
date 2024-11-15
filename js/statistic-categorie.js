@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Object.keys(localStorage).forEach(key => {
         try {
+            if (key === 'admin') return;
             const user = JSON.parse(localStorage.getItem(key));
             if (user && user.username) {
                 const option = document.createElement('option');
