@@ -44,7 +44,8 @@ function createUser() {
             "comprehension":true
         },
         category : "",
-        LivelScore : "b2"
+        LivelScore : "b2",
+        responses : []
         
     };
     

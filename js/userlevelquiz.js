@@ -2,6 +2,7 @@ function redirectToQuiz(level, category) {
     const params = new URLSearchParams(window.location.search);
     const username = params.get("userName");
     const storedUser = JSON.parse(localStorage.getItem(username));
+    // const currentScore = document.getElementById('currentScore');
 
     if (!storedUser) {
         alert("User not found. Please create an account first.");
@@ -61,8 +62,8 @@ function initializeQuizPage() {
             break;
     }
     let flixebleArray = questionsArray[storedUser.category];
-    console.log(flixebleArray);
-    //mn hna bda risk********************************************************************************************************
+    // console.log(flixebleArray);
+    //********************************************************************************************************
     let currentQuestionIndex = 0;
     let score = 0;
     let timerInterval;
@@ -80,6 +81,8 @@ function initializeQuizPage() {
         document.getElementById("timer").style.display = "flex";
         document.getElementById("start-button").classList.add("hidden");
         document.getElementById("question-container").classList.remove("hidden");
+        document.getElementById("currentScore").textContent = `Your score is: ${score}`;
+
         loadQuestion();
     });
     function startTimer() {
@@ -109,7 +112,6 @@ function initializeQuizPage() {
         clearInterval(timerInterval);
         startTimer();
         const currentQuestion = flixebleArray[currentQuestionIndex];
-        console.log(currentQuestion+"hhhhhhh");
         document.getElementById("question").textContent = currentQuestion.question;
         const optionsContainer = document.getElementById("options");
         optionsContainer.innerHTML = ""; 
@@ -128,6 +130,7 @@ function initializeQuizPage() {
     
     function goToNextQuestion() {
         currentQuestionIndex++;
+        // currentScore.textContent = "your score is : " + ${currentQuestionIndex};
         if (currentQuestionIndex < flixebleArray.length) {
             loadQuestion();
             document.getElementById("next-button").classList.add("hidden");
@@ -135,6 +138,8 @@ function initializeQuizPage() {
             endQuiz();
         }
     }
+
+
     function selectAnswer(answer, button) {
         const currentQuestion = flixebleArray[currentQuestionIndex];
         const timeTaken = document.getElementById("timer").textContent;
@@ -147,12 +152,15 @@ function initializeQuizPage() {
         } else {
             button.classList.add("incorrect");
             highlightCorrectAnswer();
-        }
+        }       
+
+        document.getElementById("currentScore").textContent = `Your score is: ${score}`;
+
         quizResponses.push({
             question: currentQuestion.question,
             userAnswer: answer,
             isCorrect: isCorrect,
-            timeTaken: timeTaken
+            timeTaken: 10-timeTaken
         });
         document.getElementById("next-button").classList.remove("hidden");
     }
@@ -165,21 +173,22 @@ function initializeQuizPage() {
         });
     }
     function endQuiz() {
-        if(score == 10) {
-          storedUser.categorys[storedUser.category] = true;
-          storedUser.score = score;
-          localStorage.setItem(username, JSON.stringify(storedUser));
+        if(score === flixebleArray.length) {  // hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+            if (!storedUser.categorys) storedUser.categorys = {};
+            storedUser.categorys[storedUser.category] = true;
+            storedUser.score = score;
+            storedUser.responses = quizResponses;
+            localStorage.setItem(username, JSON.stringify(storedUser));
         }
-
-
+    
         const scoreContainer = document.getElementById("sc");
         scoreContainer.innerHTML = `Votre score est de ${score} / ${flixebleArray.length}.`;
         document.getElementById("timer").style.display = "none";
         clearInterval(timerInterval);
         document.getElementById("question-container").classList.add("hidden");
         document.getElementById('retake-button').classList.remove('hidden');
-        
     }
+    
 
     document.getElementById("next-button").addEventListener('click', goToNextQuestion);
     document.getElementById("retake-button").addEventListener('click', retakeQuiz);
@@ -187,7 +196,7 @@ function initializeQuizPage() {
     function retakeQuiz() {
         window.location.href = "categories.html?userName="+storedUser.username;
     }
-    //mn hna sala risk******************************************************************************** 
+    //******************************************************************************** 
 }
 //mat9sich hna lta7t
 if (window.location.pathname.includes("userlevelquiz.html")) {
