@@ -320,3 +320,8 @@ function addQuestion(category) {
  }
  
  console.log("dashboard.js chargé, displayQuestions définie :", typeof displayQuestions);
+
+
+
+
+
