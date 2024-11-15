@@ -40,7 +40,7 @@ function createUser() {
         categorys : {
             "grammar":true,
             "vocabulary":true,
-            "comprehension":true
+            "comprehension":false
         },
         category : "",
         LivelScore : "b2",

@@ -151,7 +151,6 @@ function displayQuestions(category , nv) {
     }
 }
 
-
 //fonction de modification
 function editQuestion(category, index) {
     // Récupérer la question à modifier
