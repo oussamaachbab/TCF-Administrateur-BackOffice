@@ -5,11 +5,18 @@
 .niveauBut{
     background-color: brown;
 }
-#questions-container {
+#questions-container,#A2-questions-container,#B1-questions-container,
+#B2-questions-container,#C1-questions-container,#C2-questions-container {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.5s ease;
 }
-#questions-container.open {
-    max-height: 1000px; /* Une valeur suffisamment grande pour contenir toutes les questions */
+#questions-container.open,#A2-questions-container.open,#B1-questions-container.open,
+#B2-questions-container.open,#C1-questions-container.open,#C2-questions-container.open {
+    max-height: 1000px;
 }
+#category-buttons,#a2-buttons, #b1-buttons , #b2-buttons, #c1-buttons, #c2-buttons { 
+    margin-bottom: 20px;
+}
+
+
