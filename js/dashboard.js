@@ -53,14 +53,14 @@ function saveQuestionsData() {
 // afficher les questions en fonction de la catégorie
 function displayQuestions(category) {
     const container = document.getElementById('questions-container');
-    // masquer la catégorie affiché avec une animation
+
     if (container.getAttribute('data-category') === category && container.style.maxHeight !== '0px') {
         container.style.maxHeight = '0';
         setTimeout(() => {
             container.style.display = 'none';
         }, 500);
     } else {
-        // afficher la catégorie si elle est masqué
+
         container.style.display = 'block'; 
         container.setAttribute('data-category', category); // Définir la catégorie actuelle
         container.innerHTML = ''; // Réinitialiser le contenu du conteneur

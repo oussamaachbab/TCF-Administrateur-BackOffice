@@ -1,12 +1,4 @@
-// const admin = {
-//     id : 'admin1',
-//     role : 'admin',
-//     username : "admin",
-//     password : "admin",
-// };
 
-// const adminJson = JSON.stringify(admin);
-// localStorage.setItem("admin", adminJson);
 document.getElementById('loginsubmit').addEventListener('click',function (event){
     event.preventDefault();
     const username = document.getElementById('username').value;
