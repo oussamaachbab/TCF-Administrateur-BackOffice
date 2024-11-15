@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get("userName");
     const storedUser = JSON.parse(localStorage.getItem(username));
+    const disuser = document.getElementById('disuser');
+
+    disuser.textContent = "USERNAME : " + params.get("userName")
     
     if (storedUser.categorys.comprehension && storedUser.categorys.grammar && storedUser.categorys.vocabulary) {
 
