@@ -185,6 +185,7 @@ function levelScore(score) {
 function generatePDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
+    
 
     doc.setFontSize(14);
     doc.text(10, 10, 'Résultats du Quiz de Français');

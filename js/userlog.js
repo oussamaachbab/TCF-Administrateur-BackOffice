@@ -25,7 +25,7 @@ function createUser() {
         categorys : {
             "grammar":false,
             "vocabulary":false,
-            "comprehension":false
+            "comprehension":false,
         },
         category : "",
         LivelScore : "a1",
@@ -41,4 +41,8 @@ function createUser() {
     window.location.href = "categories.html?userName="+userName;
     
 }
+
+
+
+
 
