@@ -61,8 +61,8 @@ function initializeQuizPage() {
             break;
     }
     let flixebleArray = questionsArray[storedUser.category];
-    console.log(flixebleArray);
-    //mn hna bda risk********************************************************************************************************
+    // console.log(flixebleArray);
+    //********************************************************************************************************
     let currentQuestionIndex = 0;
     let score = 0;
     let timerInterval;
@@ -109,7 +109,6 @@ function initializeQuizPage() {
         clearInterval(timerInterval);
         startTimer();
         const currentQuestion = flixebleArray[currentQuestionIndex];
-        console.log(currentQuestion+"hhhhhhh");
         document.getElementById("question").textContent = currentQuestion.question;
         const optionsContainer = document.getElementById("options");
         optionsContainer.innerHTML = ""; 
@@ -152,7 +151,7 @@ function initializeQuizPage() {
             question: currentQuestion.question,
             userAnswer: answer,
             isCorrect: isCorrect,
-            timeTaken: timeTaken
+            timeTaken: 10-timeTaken
         });
         document.getElementById("next-button").classList.remove("hidden");
     }
@@ -168,7 +167,9 @@ function initializeQuizPage() {
         if(score == 10) {
           storedUser.categorys[storedUser.category] = true;
           storedUser.score = score;
+          storedUser.responses=quizResponses;
           localStorage.setItem(username, JSON.stringify(storedUser));
+
         }
 
 
@@ -187,7 +188,7 @@ function initializeQuizPage() {
     function retakeQuiz() {
         window.location.href = "categories.html?userName="+storedUser.username;
     }
-    //mn hna sala risk******************************************************************************** 
+    //******************************************************************************** 
 }
 //mat9sich hna lta7t
 if (window.location.pathname.includes("userlevelquiz.html")) {
