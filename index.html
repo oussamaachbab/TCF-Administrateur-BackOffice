@@ -3,39 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="quiz site, quiz challenges, quiz topics, brain games, learn with quizzes, quiz categories, knowledge quiz">
-    <meta name="description" content="Explore a variety of quiz categories and challenges on our quiz site. Engage with brain-stimulating questions and enhance your learning experience.">
-    <title>Institut-Balzac</title>
-    <link rel="stylesheet" href="./css/index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
+    <title>User Management</title>
+    <script src="index.js" defer></script> 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 150vh;
+        }
+    </style>
 </head>
-<body>
-    <div style="width: 100%; display: flex; justify-content: center;">
-        <div class="logo"></div>
-    </div>
-    <div style="" class="header">
+<body class="bg-gray-100">
 
-        <h1 style="">Institut-Balzac</h1>
-        <h2 id="sc">Test de compréhension</h2>
-    </div>
-    <div id="quiz-container">
-        <h3>Test de TCF</h3>
-        <div id="div-timer">
-            <div id="timer" style="display: none;" class="hidden" ></div>
+    <!-- <div class="flex justify-end mt-0 mb-0 rounded-lg">
+        <a href="./adminlog.html" class="m-10 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Sign In
+        </a>
+    </div> -->
+
+    <div class="">
+        <div style="width:100%; height:auto; display: flex; justify-content: center;">
+            <img src="./img/undraw_undraw_undraw_undraw_selection_f3no_jw9h_-1-_nxfh_-1-_6d1x.svg" alt="" style="width: 600px;">
         </div>
-        <button id="start-button" onclick="startQuiz()">Demarrer Le Quiez</button>
-        <div id="question-container" class="hidden">
-            <div id="question">test</div>
-            <div id="options">test</div>
-            <button class="hidden" id="next-button">Suivant</button>
+        <div class="max-w-md mx-auto mt-5 p-6 bg-white shadow-xl rounded-lg">
+            <h1 class="text-2xl font-semibold text-center mb-6">Créer un compte</h1>
+            <input type="text" id="username" class="w-full p-3 border border-gray-300 rounded mb-4" placeholder="Entrez votre nom d'utilisateur" />
+            <button onclick="createUser()" class="font-bold hover:bg-blue-700 w-full p-3 bg-blue-500 text-white rounded">Start The Quiz</button>
         </div>
-        <!-- <div id="score-container" class="hidden"></div> -->
-        <button id="retake-button" class="hidden" onclick="retakeQuiz()">Reprendre Quiz</button>
-
     </div>
 
+    <script src="./js/data.js"></script>
     <script src="./js/index.js"></script>
-    
+    <script src="./js/userlevelquiz.js"></script>
 </body>
 </html>
