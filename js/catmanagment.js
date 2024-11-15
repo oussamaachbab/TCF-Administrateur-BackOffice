@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
 
-        // Enable buttons up to and including the next level
         for (let i = 0; i <= nextLevelIndex; i++) {
             const levelClass = levels[i];
             let buttons = document.getElementsByClassName(levelClass);
