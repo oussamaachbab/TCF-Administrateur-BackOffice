@@ -155,12 +155,13 @@ function initializeQuizPage() {
         }       
 
         document.getElementById("currentScore").textContent = `Your score is: ${score}`;
-
+        console.log('Current Question:', currentQuestion);
+        console.log('User Answer:', answer);
         quizResponses.push({
             question: currentQuestion.question,
             userAnswer: answer,
             isCorrect: isCorrect,
-            timeTaken: 10-timeTaken
+            timeTaken: timeTaken
         });
         document.getElementById("next-button").classList.remove("hidden");
     }
@@ -177,10 +178,14 @@ function initializeQuizPage() {
             if (!storedUser.categorys) storedUser.categorys = {};
             storedUser.categorys[storedUser.category] = true;
             storedUser.score = score;
-            storedUser.responses = quizResponses;
+            // storedUser.responses = quizResponses;
+            storedUser.responses[storedUser.category] = quizResponses;
             localStorage.setItem(username, JSON.stringify(storedUser));
         }
-    
+        
+        storedUser.responses[storedUser.category] = quizResponses;
+        localStorage.setItem(username, JSON.stringify(storedUser));
+
         const scoreContainer = document.getElementById("sc");
         scoreContainer.innerHTML = `Votre score est de ${score} / ${flixebleArray.length}.`;
         document.getElementById("timer").style.display = "none";
@@ -198,7 +203,6 @@ function initializeQuizPage() {
     }
     //******************************************************************************** 
 }
-//mat9sich hna lta7t
 if (window.location.pathname.includes("userlevelquiz.html")) {
     document.addEventListener("DOMContentLoaded", initializeQuizPage);
 }

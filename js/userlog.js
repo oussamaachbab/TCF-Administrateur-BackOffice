@@ -1,18 +1,3 @@
-
-
-const admin = {
-    id : 'admin1',
-    role : 'admin',
-    username : "admin",
-    password : "admin",
-};
-
-const adminJson = JSON.stringify(admin);
-localStorage.setItem("admin", adminJson);
-
-
-
-
 function createUser() {
     var userName = document.getElementById('username').value;
     
@@ -31,20 +16,22 @@ function createUser() {
     
     
     const userId = 'user_'+ new Date().getTime();
-    
+    const now = new Date();
     const user = {
         id : userId,
         role : 'user',
         username : userName,
         score : 0,
         categorys : {
-            "grammar":true,
-            "vocabulary":true,
-            "comprehension":true
+            "grammar":false,
+            "vocabulary":false,
+            "comprehension":false
         },
         category : "",
-        LivelScore : "b2",
-        responses : []
+        LivelScore : "a1",
+        responses : {},
+        date : `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()}`
+        // date : "15-11-2024"
         
     };
     

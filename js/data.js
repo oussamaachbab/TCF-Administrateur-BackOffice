@@ -243,5 +243,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
   //   return data ? JSON.parse(data) : null;
   // }
   
+    const admin = {
+      id : 'admin1',
+      role : 'admin',
+      username : "admin",
+      password : "admin",
+    };
+
+    const adminJson = JSON.stringify(admin);
+    localStorage.setItem("admin", adminJson);
 
 });
