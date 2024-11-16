@@ -277,34 +277,3 @@ function addQuestion(category) {
 
 
 
-
-
-
-
-const pdf = document.getElementById('pdf');
-
-
-pdf = document.addEventListener('click', () => {
-    const pdf = new jsPDF();
-    const category = document.getElementById('category').value;
-    const questions = a1[category];
-    const title = document.getElementById('title').value;
-    const subtitle = document.getElementById('subtitle').value;
-    const date = document.getElementById('date').value;
-    const author = document.getElementById('author').value;
-    const correct = document.getElementById('correct').value;
-    const incorrect = document.getElementById('incorrect').value;
-    const questionsData = questions.map((question, index) => {
-        return `Question ${index + 1}: ${question.question} \n Réponse correcte
-        ${question.correct} \n Réponse incorrecte
-        ${question.incorrect} \n\n`;
-        }).join('');
-        pdf.text(title, 10, 10);
-        pdf.text(subtitle, 10, 20);
-        pdf.text(date, 10, 30);
-        pdf.text(author, 10, 40);
-        pdf.text(correct, 10, 50);
-        pdf.text(incorrect, 10, 60);
-        pdf.text(questionsData, 10, 70);
-        
-});

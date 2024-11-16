@@ -20,3 +20,31 @@
 }
 
 
+
+.statistiques-container{
+    /* border: 1px solid black; */
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+}
+
+
+.stats{
+    background-color: lightgreen;
+    border-radius: 2%;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.stat-title{
+    font-size: 650%;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

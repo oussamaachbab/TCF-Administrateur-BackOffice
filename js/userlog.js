@@ -38,12 +38,12 @@ function createUser() {
         username : userName,
         score : 0,
         categorys : {
-            "grammar":true,
-            "vocabulary":true,
-            "comprehension":true
+            "grammar":false,
+            "vocabulary":false,
+            "comprehension":false
         },
         category : "",
-        LivelScore : "b2",
+        LivelScore : "a1",
         responses : []
         
     };
@@ -54,4 +54,8 @@ function createUser() {
     window.location.href = "categories.html?userName="+userName;
     
 }
+
+
+
+
 
