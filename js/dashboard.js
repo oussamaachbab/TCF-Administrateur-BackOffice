@@ -1,21 +1,20 @@
-
 if (!localStorage.getItem('a1')) {
-    localStorage.setItem('a1', JSON.stringify(a1));
+    alert("no data for level a1 to work on it");
 }
 if (!localStorage.getItem('a2')) {
-    localStorage.setItem('a2', JSON.stringify(a2));
+    alert("no data for level a2 to work on it");
 }
 if (!localStorage.getItem('b1')) {
-    localStorage.setItem('b1', JSON.stringify(b1));
+    alert("no data for level b1 to work on it");
 }
 if (!localStorage.getItem('b2')) {
-    localStorage.setItem('b2', JSON.stringify(b2));
+    alert("no data for level b2 to work on it");
 }
 if (!localStorage.getItem('c1')) {
-    localStorage.setItem('c1', JSON.stringify(c1));
+    alert("no data for level c1 to work on it");
 }
 if (!localStorage.getItem('c2')) {
-    localStorage.setItem('c2', JSON.stringify(c2));
+    alert("no data for level c2 to work on it");
 }
 
 // Charger les données depuis localStorage
@@ -28,13 +27,63 @@ const c2 = JSON.parse(localStorage.getItem('c2'));
 
 // Fonction pour sauvegarder les données dans localStorage après chaque modification
 function saveQuestionsData() {
-    localStorage.setItem('a1', JSON.stringify(a1));
+    localStorage.setItem(level, JSON.stringify(levelchange));
 }
+// function saveQuestionsData(level) {
+//     let levelchange;
+//     switch (level) {
+//         case 'a1': 
+//         levelchange = a1;
+//             break;
+//         case 'a2':
+//             levelchange = a2;
+//             break;
+//         case 'b1':
+//             levelchange = b1;
+//             break;
+//         case 'b2': 
+//         levelchange = b2;
+//             break;
+//         case 'c1':
+//             levelchange = c1;
+//             break;
+//         case 'c2':
+//             levelchange = c2;
+//             break;
+//         default:
+//             break;
+//     }
 
+//     localStorage.setItem(level, JSON.stringify(levelchange));
+// }
 
-// afficher les questions en fonction de la catégorie
-function displayQuestions(category) {
-    const container = document.getElementById('questions-container');
+function displayQuestions(category , nv) {
+    let levelchange;
+    switch (nv) {
+        case 'a1': 
+            levelchange = a1;
+            break;
+        case 'a2':
+            levelchange = a2;
+            break;
+        case 'b1':
+            levelchange = b1;
+            break;
+        case 'b2': 
+            levelchange = b2;
+            break;
+        case 'c1':
+            levelchange = c1;
+            break;
+        case 'c2':
+            levelchange = c2;
+            break;
+        default:
+            alert("Error: No Score Level Assigned");
+            break;
+    }
+    // const container = document.getElementById('questions-container');
+    const container = document.getElementById(nv);
 
     if (container.getAttribute('data-category') === category && container.style.maxHeight !== '0px') {
         container.style.maxHeight = '0';
@@ -51,9 +100,10 @@ function displayQuestions(category) {
         container.appendChild(categoryTitle);
 
         // Ajouter les questions
-        a1[category].forEach((q, index) => {
+        levelchange[category].forEach((q, index) => {
             const questionDiv = document.createElement('div');
             questionDiv.style.textAlign = 'center';
+            questionDiv.classList.add('question-container');
             questionDiv.classList.add('question-container');
 
             const questionText = document.createElement('p');
@@ -100,7 +150,6 @@ function displayQuestions(category) {
         }, 400);
     }
 }
-
 
 
 //fonction de modification
