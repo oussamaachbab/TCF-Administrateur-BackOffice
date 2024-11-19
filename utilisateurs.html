@@ -77,12 +77,19 @@
 
             <!-- Main content -->
             <div class="main-container">
+                <div class="conteneur">
                 <div id="userContainer">
-                    <input type="text"placeholder="taper le nom d'utilisateur ici..." >
+                    <input type="text" id="searchInput"placeholder="taper le nom d'utilisateur ici..." ><br>
+                    <label for="sortSelect">Trier par :</label>
+                    <select id="sortSelect">
+                        <option value="level">Niveau</option>
+                        <option value="date">Date de test</option>
+                    </select>
+                    <div id="usersContainer1"></div>
                 </div>
                 <div id="usersContainer">
                 </div>
-
+            </div>
             </div>
             
         </div>
