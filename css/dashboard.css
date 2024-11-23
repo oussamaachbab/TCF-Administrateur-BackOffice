@@ -1,25 +1,46 @@
 .bouttonCat{
     display: flex;
     gap:20px;
+    border-radius: 5px;
 }
 .niveauBut{
     background-color: brown;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    height: 50px;
 }
 #questions-container,#A2-questions-container,#B1-questions-container,
 #B2-questions-container,#C1-questions-container,#C2-questions-container {
-    overflow: hidden;
     max-height: 0;
-    transition: max-height 0.5s ease;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
 }
 #questions-container.open,#A2-questions-container.open,#B1-questions-container.open,
 #B2-questions-container.open,#C1-questions-container.open,#C2-questions-container.open {
     max-height: 1000px;
+    opacity: 1;
 }
-#category-buttons,#a2-buttons, #b1-buttons , #b2-buttons, #c1-buttons, #c2-buttons { 
+#category-buttons,#A2-buttons, #B1-buttons , #B2-buttons, #C1-buttons, #C2-buttons { 
     margin-bottom: 20px;
 }
 
+/*formulaire normal */
+#formulaire-container,
+#formulaire-ajout-container {
+    position: relative;
+    z-index: 1060;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    transition: transform 0.3s ease; /* Animation fluide */
+}
 
+/*===============================*/
 
 .statistiques-container{
     /* border: 1px solid black; */
@@ -47,4 +68,72 @@
 .stat-title{
     font-size: 650%;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.conteneur{
+    display:flex;
+    gap: 5px;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
+}
+#userContainer,
+#usersContainer {
+    width:50%;
+    height:100vh;
+    border:2px solid #007bff;
+    border-radius:5px;
+    padding:10px;
+    margin: 10px;
+    background-color:#f9f9f9;
+    overflow:auto;
+}
+label{
+    margin-top: 10px;
+}
+/* Style pour l'input */
+#searchInput {
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-shadow:0 2px 4px rgba(0, 0, 0, 0.1);
+    outline:none;
+    transition:all 0.3s ease;
+}
+
+#searchInput:focus{
+    border-color:#007bff;
+    box-shadow:0 2px 6px rgba(0, 123, 255, 0.4);
+}
+
+/*Style pour le select*/
+#sortSelect {
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    background-color:#fff;
+    appearance:none;
+    outline:none;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#sortSelect:hover{
+    border-color:#007bff;
+}
+
+#sortSelect:focus{
+    border-color:#007bff;
+    box-shadow:0 2px 6px rgba(0, 123, 255, 0.4);
+}
+
+/* Ajout d'une flèche personnalisée pour le select */
+#sortSelect {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23007bff' d='M0 3l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
 }
