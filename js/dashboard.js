@@ -1,327 +1,252 @@
-if (!localStorage.getItem('a1')) {
-    alert("no data for level a1 to work on it");
-}
-if (!localStorage.getItem('a2')) {
-    alert("no data for level a2 to work on it");
-}
-if (!localStorage.getItem('b1')) {
-    alert("no data for level b1 to work on it");
-}
-if (!localStorage.getItem('b2')) {
-    alert("no data for level b2 to work on it");
-}
-if (!localStorage.getItem('c1')) {
-    alert("no data for level c1 to work on it");
-}
-if (!localStorage.getItem('c2')) {
-    alert("no data for level c2 to work on it");
-}
+//regrouper les niveaux dans un seul objet
+const levels={ 
+    a1: JSON.parse(localStorage.getItem('a1'))||{}, 
+    a2: JSON.parse(localStorage.getItem('a2'))||{}, 
+    b1: JSON.parse(localStorage.getItem('b1'))||{}, 
+    b2: JSON.parse(localStorage.getItem('b2'))||{}, 
+    c1: JSON.parse(localStorage.getItem('c1'))||{}, 
+    c2: JSON.parse(localStorage.getItem('c2'))||{} 
+};
 
-// Charger les données depuis localStorage
-const a1 = JSON.parse(localStorage.getItem('a1'));
-const a2 = JSON.parse(localStorage.getItem('a2'));
-const b1 = JSON.parse(localStorage.getItem('b1'));
-const b2 = JSON.parse(localStorage.getItem('b2'));
-const c1 = JSON.parse(localStorage.getItem('c1'));
-const c2 = JSON.parse(localStorage.getItem('c2'));
-
-// Fonction pour sauvegarder les données dans localStorage après chaque modification
-function saveQuestionsData() {
-    localStorage.setItem(level, JSON.stringify(levelchange));
-}
-// function saveQuestionsData(level) {
-//     let levelchange;
-//     switch (level) {
-//         case 'a1': 
-//         levelchange = a1;
-//             break;
-//         case 'a2':
-//             levelchange = a2;
-//             break;
-//         case 'b1':
-//             levelchange = b1;
-//             break;
-//         case 'b2': 
-//         levelchange = b2;
-//             break;
-//         case 'c1':
-//             levelchange = c1;
-//             break;
-//         case 'c2':
-//             levelchange = c2;
-//             break;
-//         default:
-//             break;
-//     }
-
-//     localStorage.setItem(level, JSON.stringify(levelchange));
-// }
-
-function displayQuestions(category , nv) {
-    let levelchange;
-    switch (nv) {
-        case 'a1': 
-            levelchange = a1;
-            break;
-        case 'a2':
-            levelchange = a2;
-            break;
-        case 'b1':
-            levelchange = b1;
-            break;
-        case 'b2': 
-            levelchange = b2;
-            break;
-        case 'c1':
-            levelchange = c1;
-            break;
-        case 'c2':
-            levelchange = c2;
-            break;
-        default:
-            alert("Error: No Score Level Assigned");
-            break;
+//===================================//
+function saveQuestionsData(level){
+    if (levels[level]) {
+        localStorage.setItem(level, JSON.stringify(levels[level]));
     }
-    // const container = document.getElementById('questions-container');
-    const container = document.getElementById(nv);
+}
 
-    if (container.getAttribute('data-category') === category && container.style.maxHeight !== '0px') {
-        container.style.maxHeight = '0';
-        setTimeout(() => {
-            container.style.display = 'none';
-        }, 500);
-    } else {
-        container.style.display = 'block';
-        container.setAttribute('data-category', category);
-        container.innerHTML = ''; 
+//===================================//
+function displayQuestions(category, level){
+    const currentLevelData=levels[level];
+    if(!currentLevelData){
+        alert(`Données introuvables pour le niveau ${level}`);
+        return;
+    }
 
-        const categoryTitle = document.createElement('h4');
-        categoryTitle.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        container.appendChild(categoryTitle);
+    const container=document.getElementById(level);
+    if(!container){
+        alert(`Conteneur introuvable pour le niveau ${level}`);
+        return;
+    }
 
-        // Ajouter les questions
-        levelchange[category].forEach((q, index) => {
+    //vérifiez si le conteneur est déjà affiché pour cette catégorie
+    const isActive = container.classList.contains('active') && container.getAttribute('data-category')===category;
+
+    //masquez toutes les autres catégories
+    document.querySelectorAll('.questions-container').forEach(cont =>{
+        cont.classList.remove('active');
+        cont.style.display = 'none';
+    });
+
+    if(isActive){
+        //masquer si déjà actif
+        container.classList.remove('active');
+        container.style.display='none';
+    }else{
+        //afficher les questions de la catégorie sélectionnée
+        container.style.display='block';
+        container.classList.add('active');
+        container.setAttribute('data-category',category);
+        container.innerHTML = ''; //réinitialiser le contenu
+
+        //ajoutez les questions
+        (currentLevelData[category]|| []).forEach((q,index)=>{
             const questionDiv = document.createElement('div');
-            questionDiv.style.textAlign = 'center';
-            questionDiv.classList.add('question-container');
+            questionDiv.style.border='2px solid #007bff';
+            questionDiv.style.padding='10px';
+            questionDiv.style.borderRadius='5px';
+            questionDiv.style.marginBottom='10px';
+            questionDiv.style.background='#fff';
+            questionDiv.style.textAlign='center';
             questionDiv.classList.add('question-container');
 
-            const questionText = document.createElement('p');
-            questionText.textContent = `${index + 1}. ${q.question}`;
+            const questionText=document.createElement('p');
+            questionText.textContent=`${index + 1}. ${q.question}`;
             questionDiv.appendChild(questionText);
 
-            q.answers.forEach(answer => {
-                const answerText = document.createElement('p');
-                answerText.textContent = answer;
-                if (answer === q.correct) {
-                    answerText.style.color = 'green';
+            q.answers.forEach(answer =>{
+                const answerText =document.createElement('p');
+                answerText.textContent =answer;
+                if (answer===q.correct){
+                    answerText.style.color='green';
                     answerText.style.fontWeight = 'bold';
                 }
                 questionDiv.appendChild(answerText);
             });
 
-            const editIcon = document.createElement('span');
+            const editIcon= document.createElement('span');
             editIcon.textContent = '✏️';
             editIcon.style.cursor = 'pointer';
-            editIcon.style.marginRight = '10px';
-            editIcon.onclick = () => editQuestion(category, index);
+            editIcon.onclick=()=>editQuestion(category, index,level);
             questionDiv.appendChild(editIcon);
 
-            const deleteIcon = document.createElement('span');
+            const deleteIcon =document.createElement('span');
             deleteIcon.textContent = '🗑️';
             deleteIcon.style.cursor = 'pointer';
-            deleteIcon.onclick = () => deleteQuestion(category, index);
+            deleteIcon.onclick =()=>deleteQuestion(category,index,level);
             questionDiv.appendChild(deleteIcon);
 
             container.appendChild(questionDiv);
         });
 
-      
-
-        // Ajouter le bouton "Ajouter une question" pour la catégorie en cours
-        const addButton = document.createElement('button');
-        addButton.textContent = `Ajouter une question (${category})`;
-        addButton.classList.add('btn', 'btn-outline-primary', 'mt-3');
-        addButton.onclick = () => addQuestion(category);
+        //le bouton pour ajouter des questions
+        const addButton=document.createElement('button');
+        addButton.textContent=`Ajouter une question (${category})`;
+        addButton.style.display='inline-block';
+        addButton.style.padding='10px 20px';
+        addButton.style.marginBottom='20px';
+        addButton.style.color='#fff';
+        addButton.style.backgroundColor='red';
+        addButton.style.border='none';
+        addButton.style.borderRadius ='5px';
+        addButton.style.cursor='pointer';
+        addButton.onclick=()=>addQuestion(category, level);
         container.appendChild(addButton);
-
-        setTimeout(() => {
-            container.style.maxHeight = container.scrollHeight + 'px';
-        }, 400);
     }
 }
 
-//fonction de modification
-function editQuestion(category, index) {
-    // Récupérer la question à modifier
-    const questionData = a1[category][index];
-    
-    //création de formulaire de modification
-    const formulaire = `
+
+//===================================//
+function editQuestion(category,index,level){
+    const questionData=levels[level][category][index];
+    const formulaire=`
         <div id="formulaire-container" style="padding: 20px; background: #fff; border: 1px solid; border-radius: 5px; margin: 100px;">
             <h3>Modifier la question ${index + 1}</h3>
-            <label for="question-text">Question :</label>
+            <label>Question :</label>
             <input type="text" id="question-text" value="${questionData.question}" style="width: 100%; margin-bottom: 10px;" />
             
-            <label for="answer1">Réponse 1 :</label>
+            <label>Réponse 1 :</label>
             <input type="text" id="answer1" value="${questionData.answers[0]}" style="width: 100%; margin-bottom: 10px;" />
             
-            <label for="answer2">Réponse 2 :</label>
+            <label>Réponse 2 :</label>
             <input type="text" id="answer2" value="${questionData.answers[1]}" style="width: 100%; margin-bottom: 10px;" />
             
-            <label for="answer3">Réponse 3 :</label>
+            <label>Réponse 3 :</label>
             <input type="text" id="answer3" value="${questionData.answers[2]}" style="width: 100%; margin-bottom: 10px;" />
             
-            <label for="answer4">Réponse 4 :</label>
+            <label>Réponse 4 :</label>
             <input type="text" id="answer4" value="${questionData.answers[3]}" style="width: 100%; margin-bottom: 10px;" />
             
-            <label for="correct-answer">Réponse correcte :</label>
+            <label>Réponse correcte :</label>
             <input type="text" id="correct-answer" value="${questionData.correct}" style="width: 100%; margin-bottom: 10px;" />
             
             <button id="save-edit-btn">Sauvegarder</button>
-            <button id="cancel-edit-btn" style="margin-left: 10px;">Annuler</button>
+            <button id="cancel-edit-btn">Annuler</button>
         </div>
     `;
 
-    //afficher le formulaire dans une modal
-    const modalContainer = document.createElement('div');
-    modalContainer.id = 'modal-container';
-    modalContainer.style.position = 'fixed';
-    modalContainer.style.top = '0';
-    modalContainer.style.left = '0';
-    modalContainer.style.width = '100vw';
-    modalContainer.style.height = '100vh';
-    modalContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-    modalContainer.style.display = 'flex';
-    modalContainer.style.alignItems = 'center';
-    modalContainer.style.justifyContent = 'center';
-    modalContainer.innerHTML = formulaire;
-    document.body.appendChild(modalContainer);
+    //affichage du formulaire
+    const modal=document.createElement('div');
+    modal.id='modal-container';
+    modal.style =`position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center;`;
+    modal.innerHTML=formulaire;
+    document.body.appendChild(modal);
 
-    //sauvegarder les modifications
-    document.getElementById('save-edit-btn').addEventListener('click', () => {
-        const newQuestion = document.getElementById('question-text').value;
-        const newAnswers = [
+    document.getElementById('save-edit-btn').onclick=()=>{
+        questionData.question=document.getElementById('question-text').value;
+        questionData.answers=[
             document.getElementById('answer1').value,
             document.getElementById('answer2').value,
             document.getElementById('answer3').value,
-            document.getElementById('answer4').value
+            document.getElementById('answer4').value,
         ];
-        const newCorrectAnswer = document.getElementById('correct-answer').value;
+        questionData.correct=document.getElementById('correct-answer').value;
+        saveQuestionsData(level);
+        document.body.removeChild(modal);
+        displayQuestions(category,level);
+    };
 
-        //mettre à jour les données de la question
-        a1[category][index] = {
-            question: newQuestion,
-            answers: newAnswers,
-            correct: newCorrectAnswer
-        };
-
-        //enregistrer les données mises à jour dans localStorage
-        saveQuestionsData();
-
-        // Fermer le formulaire de modification
-        document.body.removeChild(modalContainer);
-
-        //rafraichir l'affichage des questions
-        displayQuestions(category);
-    });
-
-    //ajouter l'événement pour annuler l'édition
-    document.getElementById('cancel-edit-btn').addEventListener('click', () => {
-        //fermer la modal sans enregistrer
-        document.body.removeChild(modalContainer);
-    });
+    document.getElementById('cancel-edit-btn').onclick=()=>{
+        document.body.removeChild(modal);
+    };
 }
 
-function addQuestion(category) {
-    // Création du formulaire pour ajouter une nouvelle question
+//===================================//
+function addQuestion(category, level){
     const formulaireAjout = `
-        <div id="formulaire-ajout-container" style="padding: 20px; background: #fff; border: 1px solid; border-radius: 5px; margin: 100px;">
-            <h3>Ajouter une nouvelle question à la catégorie ${category}</h3>
+        <div id="formulaire-ajout-container" style="padding: 20px; background: white; border: 1px solid; border-radius: 5px; margin: 100px;">
+            <h3>Ajouter une nouvelle question</h3>
             <label for="new-question">Question :</label>
-            <input type="text" id="new-question" style="width: 100%; margin-bottom: 10px;" />
+            <input id="new-question" type="text" style="width: 100%; margin-bottom: 10px;" />
 
             <label for="new-answer1">Réponse 1 :</label>
-            <input type="text" id="new-answer1" style="width: 100%; margin-bottom: 10px;" />
+            <input id="new-answer1" type="text" style="width: 100%; margin-bottom: 10px;" />
 
             <label for="new-answer2">Réponse 2 :</label>
-            <input type="text" id="new-answer2" style="width: 100%; margin-bottom: 10px;" />
+            <input id="new-answer2" type="text" style="width: 100%; margin-bottom: 10px;" />
 
             <label for="new-answer3">Réponse 3 :</label>
-            <input type="text" id="new-answer3" style="width: 100%; margin-bottom: 10px;" />
+            <input id="new-answer3" type="text" style="width: 100%; margin-bottom: 10px;" />
 
             <label for="new-answer4">Réponse 4 :</label>
-            <input type="text" id="new-answer4" style="width: 100%; margin-bottom: 10px;" />
+            <input id="new-answer4" type="text" style="width: 100%; margin-bottom: 10px;" />
 
-            <label for="new-correct-answer">Réponse correcte :</label>
-            <input type="text" id="new-correct-answer" style="width: 100%; margin-bottom: 10px;" />
+            <label for="correct-answer">Réponse correcte :</label>
+            <input id="correct-answer" type="text" style="width: 100%; margin-bottom: 10px;" />
 
-            <button id="save-new-question-btn">Ajouter</button>
-            <button id="cancel-new-question-btn" style="margin-left: 10px;">Annuler</button>
+            <button id="save-new-question-btn" class="btn btn-primary">Ajouter</button>
+            <button id="cancel-new-question-btn" class="btn btn-secondary" style="margin-left: 10px;">Annuler</button>
         </div>
     `;
 
-    // Afficher le formulaire dans une modal
-    const modalContainer = document.createElement('div');
-    modalContainer.id = 'modal-container';
-    modalContainer.style.position = 'fixed';
-    modalContainer.style.top = '0';
-    modalContainer.style.left = '0';
-    modalContainer.style.width = '100vw';
-    modalContainer.style.height = '100vh';
-    modalContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-    modalContainer.style.display = 'flex';
-    modalContainer.style.alignItems = 'center';
-    modalContainer.style.justifyContent = 'center';
-    modalContainer.innerHTML = formulaireAjout;
+    //affichage du formulaire dans un modal
+    const modalContainer=document.createElement('div');
+    modalContainer.id='modal-container';
+    modalContainer.style.position='fixed';
+    modalContainer.style.top='0';
+    modalContainer.style.left='0';
+    modalContainer.style.width='100vw';
+    modalContainer.style.height='100vh';
+    modalContainer.style.backgroundColor='rgba(0, 0, 0, 0.5)';
+    modalContainer.style.display='flex';
+    modalContainer.style.alignItems='center';
+    modalContainer.style.justifyContent='center';
+    modalContainer.innerHTML=formulaireAjout;
     document.body.appendChild(modalContainer);
 
-    // Sauvegarder la nouvelle question
-    document.getElementById('save-new-question-btn').addEventListener('click', () => {
-        const newQuestionText = document.getElementById('new-question').value;
-        const newAnswers = [
+    //gestion de l'ajout de la question
+    document.getElementById('save-new-question-btn').addEventListener('click',()=>{
+        const newQuestionText=document.getElementById('new-question').value;
+        const newAnswers=[
             document.getElementById('new-answer1').value,
             document.getElementById('new-answer2').value,
             document.getElementById('new-answer3').value,
             document.getElementById('new-answer4').value
         ];
-        const newCorrectAnswer = document.getElementById('new-correct-answer').value;
+        const newCorrectAnswer=document.getElementById('correct-answer').value;
 
-        // Ajouter la nouvelle question dans la catégorie
-        a1[category].push({
+        if (!newQuestionText||newAnswers.some(ans =>!ans)||!newCorrectAnswer){
+            alert('Veuillez remplir tous les champs.');
+            return;
+        }
+
+        //ajouter la nouvelle question dans la catégorie
+        levels[level][category] = levels[level][category] || [];
+        levels[level][category].push({
             question: newQuestionText,
             answers: newAnswers,
             correct: newCorrectAnswer
         });
-
-        // Enregistrer les données mises à jour dans localStorage
-        saveQuestionsData();
-
-        // Fermer le formulaire
+        //sauvegarder dans localStorage
+        saveQuestionsData(level);
+        //fermer le formulaire
         document.body.removeChild(modalContainer);
-
-        // Rafraîchir l'affichage des questions
-        displayQuestions(category);
+        //rafraîchir l'affichage des questions
+        displayQuestions(category, level);
     });
 
-    // Annuler l'ajout de question
-    document.getElementById('cancel-new-question-btn').addEventListener('click', () => {
+    //annuler l'ajout
+    document.getElementById('cancel-new-question-btn').addEventListener('click',()=>{
         document.body.removeChild(modalContainer);
     });
 }
 
- //fonction de suppression
- function deleteQuestion(category, index) {
-     if (confirm('Voulez-vous vraiment supprimer cette question ?')) {
-         a1[category].splice(index, 1); 
-         saveQuestionsData();
-         displayQuestions(category);
-     }
- }
- 
- console.log("dashboard.js chargé, displayQuestions définie :", typeof displayQuestions);
-
-
-
-
+//===================================//
+function deleteQuestion(category, index,level){
+    if (confirm('Voulez-vous vraiment supprimer cette question ?')){
+        levels[level][category].splice(index,1);
+        saveQuestionsData(level);
+        displayQuestions(category,level);
+    }
+}
 
