@@ -28,7 +28,7 @@ function createUser() {
             "comprehension":false,
         },
         category : "",
-        LivelScore : "a1",
+        LivelScore : "b1",
         responses : {},
         date : `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()}`
         // date : "15-11-2024"
